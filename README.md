@@ -1,130 +1,66 @@
-# 📦 API Administrateur E-commerce (GameXpress)
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-## 🚀 Introduction
-Bienvenue dans l'API d'administration de **GameXpress**, une plateforme e-commerce développée avec **Laravel 11**. Cette API permet de gérer les produits, les catégories et les utilisateurs avec un système d'authentification sécurisé et une gestion des rôles avancée.
+<p align="center">
+<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+</p>
 
-## 🛠️ Technologies Utilisées
-- **Framework** : Laravel 11 & PHP 8.3
-- **Authentification** : Laravel Sanctum
-- **Gestion des rôles et permissions** : Spatie Permission
-- **Tests** : Pest PHP / PHPUnit
-- **Base de données** : MySQL
-- **Documentation API** : Swagger/OpenAPI (optionnel)
+## About Laravel
 
-## 📐 Architecture
-L'API suit une architecture **RESTful** avec :
-- 📌 **Versionnement** : `v1`
-- ✅ **Structure de réponse cohérente**
-- 🔐 **Authentification par token** (Sanctum)
-- 🛡️ **Gestion des permissions** avec Spatie
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-## 🔗 Endpoints Principaux
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-### 🔑 1. Authentification Administrateur
-- `POST /api/v1/admin/register` → Inscription
-- `POST /api/v1/admin/login` → Connexion
-- `POST /api/v1/admin/logout` → Déconnexion
+Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-### 📊 2. Tableau de Bord
-- `GET /api/v1/admin/dashboard` → Statistiques
-- Notifications email pour les stocks critiques
+## Learning Laravel
 
-### 🛍️ 3. Gestion des Produits
-- `GET /api/v1/admin/products` → Lister
-- `GET /api/v1/admin/products/{id}` → Voir un produit
-- `POST /api/v1/admin/products` → Ajouter
-- `PUT /api/v1/admin/products/{id}` → Modifier
-- `DELETE /api/v1/admin/products/{id}` → Supprimer
+Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-### 🗂️ 4. Gestion des Catégories
-- `GET /api/v1/admin/categories` → Lister
-- `POST /api/v1/admin/categories` → Ajouter
-- `PUT /api/v1/admin/categories/{id}` → Modifier
-- `DELETE /api/v1/admin/categories/{id}` → Supprimer
+You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-### 👥 5. Gestion des Utilisateurs
-- `GET /api/v1/admin/users` → Lister
-- `POST /api/v1/admin/users` → Ajouter
-- `PUT /api/v1/admin/users/{id}` → Modifier
-- `DELETE /api/v1/admin/users/{id}` → Supprimer
+If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## 🗄️ Modèles de Données
+## Laravel Sponsors
 
-### 👤 Utilisateur (`users`)
-| Champ | Type | Description |
-|-------|------|-------------|
-| `id` | int | Identifiant unique |
-| `name` | string | Nom |
-| `email` | string | Adresse e-mail |
-| `password` | string | Mot de passe |
-| `timestamps` | timestamp | Dates création & mise à jour |
+We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
-### 🏷️ Catégorie (`categories`)
-| Champ | Type | Description |
-|-------|------|-------------|
-| `id` | int | Identifiant unique |
-| `name` | string | Nom |
-| `slug` | string | URL-friendly |
-| `timestamps` | timestamp | Dates création & mise à jour |
+### Premium Partners
 
-### 🏷️ Produit (`products`)
-| Champ | Type | Description |
-|-------|------|-------------|
-| `id` | int | Identifiant unique |
-| `name` | string | Nom |
-| `price` | decimal | Prix |
-| `stock` | int | Quantité |
-| `category_id` | int | Catégorie associée |
-| `timestamps` | timestamp | Dates création & mise à jour |
+- **[Vehikl](https://vehikl.com/)**
+- **[Tighten Co.](https://tighten.co)**
+- **[WebReinvent](https://webreinvent.com/)**
+- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
+- **[64 Robots](https://64robots.com)**
+- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
+- **[Cyber-Duck](https://cyber-duck.co.uk)**
+- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
+- **[Jump24](https://jump24.co.uk)**
+- **[Redberry](https://redberry.international/laravel/)**
+- **[Active Logic](https://activelogic.com)**
+- **[byte5](https://byte5.de)**
+- **[OP.GG](https://op.gg)**
 
-## 🛡️ Gestion des Rôles et Permissions
+## Contributing
 
-### 🎭 Rôles
-- `super_admin`
-- `product_manager`
-- `user_manager`
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-### 🔑 Permissions
-- `view_dashboard`
-- `view_products`, `create_products`, `edit_products`, `delete_products`
-- `view_categories`, `create_categories`, `edit_categories`, `delete_categories`
-- `view_users`, `create_users`, `edit_users`, `delete_users`
+## Code of Conduct
 
-## 🧪 Plan de Tests
-- ✅ Tests **unitaires** pour chaque endpoint
-- ✅ Tests **de validation** des rôles et permissions
-- ✅ Tests **de performance**
+In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## 📂 Organisation du Code
-```
-📂 app
- ├── 📁 Http
- │   ├── 📂 Controllers
- │   │   └── 📂 Api/V1/Admin
- │   ├── 📂 Requests
- │   ├── 📂 Resources
- ├── 📁 Models
- ├── 📁 Middleware
- ├── 📂 routes
- │   ├── api.php
- ├── 📂 tests
- │   ├── Feature/Api/V1/Admin
-```
+## Security Vulnerabilities
 
- Finalisation des **tests et documentation API**
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## 📤 Exporter les Endpoints
-1. Ouvrez **Postman**
-2. Sélectionnez la **collection** contenant vos endpoints
-3. Cliquez sur les trois points **(...)** puis sur **Exporter**
-4. Choisissez le format **JSON** et cliquez sur **Exporter**
-5. Enregistrez le fichier pour le partager
+## License
 
----
-
-## 📜 Licence
-Ce projet est sous licence MIT. Vous êtes libre de l'utiliser, de le modifier et de le distribuer.
-
-## 📩 Contact
-Si vous avez des questions ou souhaitez contribuer, n'hésitez pas à ouvrir une issue ou à me contacter ! 🚀
-
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
