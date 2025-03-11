@@ -35,15 +35,17 @@ class Auth extends Controller
             'password' => bcrypt($request->password),
         ]);
 
-
+        $role = $user->assignRole('product_manager');
         $response = [];
         $response['name'] = $user->name;
         $response['email'] = $user->email;
+        $response['role'] = $user->getRoleNames();
 
         return response()->json([
             'status' => '200 Ok',
             'message' => 'User created successfully',
             'data' => $response,
+            'role' => $role,
         ]);
     }
 

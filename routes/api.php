@@ -29,8 +29,10 @@ Route::middleware('auth:sanctum')->group(function() {
 
 
 // route pour tester l'authentification et le token
+// aussi pour avoir le role d'user connecté
 
 Route::middleware('auth:sanctum')->get('/AuthTest', function() {
+    
     $user = auth()->user();
     $roles = $user->getRoleNames();
     return response()->json([
