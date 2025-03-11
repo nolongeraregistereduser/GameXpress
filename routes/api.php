@@ -23,4 +23,6 @@ Route::get('/', function () {
 
 Route::post('/register', [App\Http\Controllers\API\Auth::class, 'register']
 );
+Route::post('/login', [App\Http\Controllers\API\Auth::class, 'login']
+);
 
