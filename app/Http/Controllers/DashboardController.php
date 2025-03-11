@@ -23,6 +23,22 @@ public function index()
         ]);
     }
 
+    else if ($user->hasRole('product_manager')) {
+        return response()->json([
+            'status' => '200 Ok',
+            'message' => 'Welcome Product Manager',
+            'data' => $user
+        ]);
+    }
+
+    else if ($user->hasRole('user_manager')) {
+        return response()->json([
+            'status' => '200 Ok',
+            'message' => 'Welcome User Manager',
+            'data' => $user
+        ]);
+    }
+
     else {
         return response()->json([
             'status' => '403',
