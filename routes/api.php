@@ -32,7 +32,7 @@ Route::middleware('auth:sanctum')->group(function() {
 // aussi pour avoir le role d'user connecté
 
 Route::middleware('auth:sanctum')->get('/AuthTest', function() {
-    
+
     $user = auth()->user();
     $roles = $user->getRoleNames();
     return response()->json([
@@ -43,5 +43,9 @@ Route::middleware('auth:sanctum')->get('/AuthTest', function() {
 
 
 route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->middleware('auth:sanctum');
+
+// route pour les statistics d super admin
+
+route::get('/stats', [App\Http\Controllers\DashboardController::class, 'stats'])->middleware('auth:sanctum');
 
 
