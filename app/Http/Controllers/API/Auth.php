@@ -49,4 +49,29 @@ class Auth extends Controller
     }
 
 
+    public function login(Request $request)
+    
+    {
+
+
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            $user = Auth::user();
+            $response = [];
+            $response['token'] = $user->createToken('GameXpress')->plainTextToken;
+            $response['name'] = $user->name;
+            $response['email'] = $user->email;
+            return response()->json([
+                'status' => '200 Ok',
+                'message' => 'User logged in successfully',
+                'data' => $response,
+            ]);
+        } else {
+            return response()->json([
+                'status' => '0',
+                'message' => 'Invalid login details'
+            ]);
+        }
+
+    }
+
 }
