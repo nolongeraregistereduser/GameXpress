@@ -23,8 +23,6 @@ Route::get('/', function () {
 
 Route::post('/register', [App\Http\Controllers\API\Auth::class, 'register']);
 Route::post('/login', [App\Http\Controllers\API\Auth::class, 'login']);
-
-
 Route::middleware('auth:sanctum')->group(function() {
     Route::post('/logout', [App\Http\Controllers\API\Auth::class, 'logout']);
 });
@@ -33,9 +31,15 @@ Route::middleware('auth:sanctum')->group(function() {
 // route pour tester l'authentification et le token
 
 Route::middleware('auth:sanctum')->get('/AuthTest', function() {
-    return "You're Authentificated && You can see this page!";
+    $user = auth()->user();
+    $roles = $user->getRoleNames();
+    return response()->json([
+        'user' => $user,
+        'roles' => $roles
+    ]);
 });
 
 
 route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->middleware('auth:sanctum');
+
 
