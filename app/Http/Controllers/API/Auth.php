@@ -76,4 +76,17 @@ class Auth extends Controller
 
     }
 
+
+    public function logout(Request $request)
+    {
+
+        // recomended method hia delete token >> 
+        
+        $request->user()->currentAccessToken()->delete();
+        return response()->json([
+            'status' => '200 Ok',
+            'message' => 'User logged out successfully',
+        ]);
+    }
+
 }
