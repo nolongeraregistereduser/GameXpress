@@ -33,10 +33,18 @@ class Auth extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password),
         ]);
+
+          // creating token for user 
+
+        $response = [];
+        $response['token'] = $user->createToken('GameXpress')->plainTextToken;
+        $response['name'] = $user->name;
+        $response['email'] = $user->email;
+
         return response()->json([
             'status' => '200 Ok',
             'message' => 'User created successfully',
-            'data' => $user
+            'data' => $response,
         ]);
     }
 
