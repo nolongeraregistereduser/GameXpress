@@ -37,3 +37,5 @@ Route::middleware('auth:sanctum')->get('/AuthTest', function() {
 });
 
 
+route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->middleware('auth:sanctum');
+

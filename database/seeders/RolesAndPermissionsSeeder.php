@@ -4,6 +4,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use App\Models\User;
 
 class RolesAndPermissionsSeeder extends Seeder
 {
@@ -24,13 +25,13 @@ class RolesAndPermissionsSeeder extends Seeder
 
         // Define roles and their permissions
         $roles = [
-            'Super Admin' => $permissions,
-            'Product Manager' => [
+            'super_admin' => $permissions,
+            'product_manager' => [
                 'view_dashboard', 'view_products', 'create_products', 'edit_products', 'delete_products',
                 'view_categories', 'create_categories', 'edit_categories', 'delete_categories',
                 'receive_stock_alerts'
             ],
-            'User Manager' => [
+            'user_manager' => [
                 'view_dashboard', 'view_users', 'create_users', 'edit_users', 'delete_users'
             ]
         ];
@@ -40,5 +41,9 @@ class RolesAndPermissionsSeeder extends Seeder
             $role = Role::firstOrCreate(['name' => $roleName]);
             $role->syncPermissions($rolePermissions);
         }
+
+        $user = User::first();
+        $user->assignRole('super_admin');
+
     }
 }
