@@ -12,14 +12,15 @@ class SuperAdminSeeder extends Seeder
      */
     public function run(): void
     {
-        if(User::count()=== 0){
+        if(User::count() === 0){
             $user = User::create([
                 'name' => 'Super Admin',
                 'email' => 'super@admin.com',
                 'password' => bcrypt('123456'),
             ]);
+            
+            // Move this line inside the conditional
+            $user->assignRole('super_admin');
         }
-
-        $user->assignRole('super_admin');
     }
 }
