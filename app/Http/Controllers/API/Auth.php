@@ -35,10 +35,8 @@ class Auth extends Controller
             'password' => bcrypt($request->password),
         ]);
 
-          // creating token for user 
 
         $response = [];
-        $response['token'] = $user->createToken('GameXpress')->plainTextToken;
         $response['name'] = $user->name;
         $response['email'] = $user->email;
 
@@ -58,6 +56,9 @@ class Auth extends Controller
         if (FacadesAuth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = FacadesAuth::user();
             $response = [];
+
+            // Generating Token for Authentication
+            
             $response['token'] = $user->createToken('GameXpress')->plainTextToken;
             $response['name'] = $user->name;
             $response['email'] = $user->email;
