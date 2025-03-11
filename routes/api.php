@@ -23,8 +23,11 @@ Route::get('/', function () {
 
 Route::post('/register', [App\Http\Controllers\API\Auth::class, 'register']);
 Route::post('/login', [App\Http\Controllers\API\Auth::class, 'login']);
-// Route::post('/logout', [App\Http\Controllers\API\Auth::class, 'logout']);
 
+
+Route::middleware('auth:sanctum')->group(function() {
+    Route::post('/logout', [App\Http\Controllers\API\Auth::class, 'logout']);
+});
 
 
 // route pour tester l'authentification et le token

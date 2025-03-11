@@ -79,14 +79,19 @@ class Auth extends Controller
 
     public function logout(Request $request)
     {
+        try {
 
-        // recomended method hia delete token >> 
-        
-        $request->user()->currentAccessToken()->delete();
-        return response()->json([
-            'status' => '200 Ok',
-            'message' => 'User logged out successfully',
-        ]);
+            $request->user()->currentAccessToken()->delete();
+
+            return response()->json([
+                'message' => 'User logged out successfully'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Logout failed',
+                'error' => $e->getMessage()
+            ], 500); 
+        }
     }
 
 }
