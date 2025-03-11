@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Product;
+use App\Models\Category;
+use App\Models\Role;
+use App\Models\Permission;
 
 
 class DashboardController extends Controller
@@ -47,4 +51,25 @@ public function index()
     }
 }
 
+
+    public function stats()
+    {
+        $user = Auth::user();
+
+        if($user->hasRole('super_admin')){
+
+            return response()->json([
+                'status' => '200 Ok',
+                'message' => 'Super Admin Statistics',
+                'data' => [
+                    'total_users' => User::count(),
+                    'total_products' => Product::count(),
+                    'total_categories' => Category::count(),
+                    'total_roles' => Role::count(),
+                    'total_permissions' => Permission::count(),
+                ]
+            ]);
+        }
+        
+    }
 }
