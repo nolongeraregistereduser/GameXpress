@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class Auth extends Controller
 {
@@ -54,8 +55,8 @@ class Auth extends Controller
     {
 
 
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            $user = Auth::user();
+        if (FacadesAuth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            $user = FacadesAuth::user();
             $response = [];
             $response['token'] = $user->createToken('GameXpress')->plainTextToken;
             $response['name'] = $user->name;
