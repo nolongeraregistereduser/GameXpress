@@ -41,7 +41,7 @@ class ProductController extends Controller
 
             $validator = Validator::make($request->all(), [
                   'name' => 'required',
-                  'price' => 'required',
+                  'slug' => 'required',
               ]);
       
               if ($validator->fails()) {
@@ -53,12 +53,20 @@ class ProductController extends Controller
       
               $product = Product::create([
                   'name' => $request->name,
+                  'slug' => $request->slug,
                   'price' => $request->price,
+                  'stock' => $request->stock,
+                  'status' => $request->status,
+                  'category_id' => '1',
+
               ]);
       
-              $response = [];
-              $response['name'] = $product->name;
-              $response['price'] = $product->price;
+                $response = [];
+                $response['name'] = $product->name;
+                $response['slug'] = $product->slug;
+                $response['price'] = $product->price;
+                $response['stock'] = $product->stock;
+                $response['status'] = $product->status;
       
               return response()->json([
                   'status' => '200 Ok',
