@@ -101,7 +101,23 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        
+       $validatedData= $request->validate([
+            'name' => 'required',
+            'slug' => 'required',
+            'price' => 'required',
+            'stock' => 'required',
+            'status' => 'required',
+            'category_id' => 'required',
+        ]);
+
+        $product->update($validatedData);
+        return response()->json([
+            'status' => '200 Ok',
+            'message' => 'Product updated successfully',
+            'data' => $product,
+        ]);
+
     }
 
     /**
