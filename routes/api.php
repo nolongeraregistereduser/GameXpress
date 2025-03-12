@@ -54,3 +54,4 @@ route::get('/stats', [App\Http\Controllers\DashboardController::class, 'stats'])
 route::get('/products', [App\Http\Controllers\ProductController::class, 'index'])->middleware('auth:sanctum');
 route::post('/products/create', [App\Http\Controllers\ProductController::class, 'store'])->middleware('auth:sanctum');
 route::get('/products/{id}', [App\Http\Controllers\ProductController::class, 'show'])->middleware('auth:sanctum');
+route::put('/products/{id}', [App\Http\Controllers\ProductController::class, 'update'])->middleware('auth:sanctum');
