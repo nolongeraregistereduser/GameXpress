@@ -99,25 +99,55 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $id)
     {
+        $user = Auth::user();
         
-       $validatedData= $request->validate([
+        if (!$user->hasRole('super_admin') && !$user->hasRole('product_manager')) {
+            return response()->json([
+                'status' => '403 Forbidden',
+                'message' => 'Unauthorized Access',
+            ], 403);
+        }
+        
+        $product = Product::find($id);
+
+        if (!$product) {
+            return response()->json([
+                'status' => '404 Not Found',
+                'message' => 'Product not found',
+            ], 404);
+        }
+
+        $validator = Validator::make($request->all(), [
             'name' => 'required',
             'slug' => 'required',
-            'price' => 'required',
-            'stock' => 'required',
+            'price' => 'required|numeric',
+            'stock' => 'required|integer',
             'status' => 'required',
-            'category_id' => 'required',
         ]);
 
-        $product->update($validatedData);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => '400 Bad Request',
+                'errors' => $validator->errors()
+            ], 400);
+        }
+
+        $product->update([
+            'name' => $request->name,
+            'slug' => $request->slug,
+            'price' => $request->price,
+            'stock' => $request->stock,
+            'status' => $request->status,
+            'category_id' => '1',
+        ]);
+
         return response()->json([
             'status' => '200 Ok',
             'message' => 'Product updated successfully',
             'data' => $product,
         ]);
-
     }
 
     /**
