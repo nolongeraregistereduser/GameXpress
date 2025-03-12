@@ -83,12 +83,16 @@ class ProductController extends Controller
      */
     public function show(Product $id)
     {
-        $product = Product::find($id);
-        return response()->json([
-            'status' => '200 Ok',
-            'message' => 'Product Details',
-            'data' => $product
-        ]);
+   
+        $user = Auth::user();
+        if ($user->hasRole('super_admin')){
+
+            return response()->json([
+                'status' => '200 Ok',
+                'message' => 'Welcome Super Admin',
+                'data' => Product::find($id)
+            ]);
+        }
     }
 
     /**
