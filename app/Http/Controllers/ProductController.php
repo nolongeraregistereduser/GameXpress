@@ -12,7 +12,7 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index( Request $request)
+    public function index()
     {
         $user = Auth::user();
 
@@ -25,7 +25,7 @@ class ProductController extends Controller
         ]);
         }
 
-        else return 'false';
+        else return 'Unauthorized Access';
         
     }
 
@@ -34,7 +34,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**

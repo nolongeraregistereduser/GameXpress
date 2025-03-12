@@ -52,3 +52,4 @@ route::get('/stats', [App\Http\Controllers\DashboardController::class, 'stats'])
 // routes dial products kamlin
 
 route::get('/products', [App\Http\Controllers\ProductController::class, 'index'])->middleware('auth:sanctum');
+route::post('/products/create', [App\Http\Controllers\ProductController::class, 'store'])->middleware('auth:sanctum');
