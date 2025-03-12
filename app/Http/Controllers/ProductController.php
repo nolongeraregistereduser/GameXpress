@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class ProductController extends Controller
 {
@@ -12,13 +14,19 @@ class ProductController extends Controller
      */
     public function index( Request $request)
     {
+        $user = Auth::user();
 
-        
-        return response()->json([
+        if($user->hasRole('super_admin')){
+
+         return response()->json([
             'status' => '200 Ok',
-            'message' => 'Product List',
-            'data' => 'Product List'
+            'message' => 'Welcome Super Admin',
+            'data' => Product::all()
         ]);
+        }
+
+        else return 'false';
+        
     }
 
     /**

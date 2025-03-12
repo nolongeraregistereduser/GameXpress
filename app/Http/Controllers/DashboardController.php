@@ -58,7 +58,7 @@ public function index()
                 'status' => '200 Ok',
                 'message' => 'Super Admin Statistics',
                 'data' => [
-                    'total_users' => User::count(),
+                'total_users' => User::count(),
                     // i will add other statistics when impplementing categ and products in db 
                 ]
             ]);
