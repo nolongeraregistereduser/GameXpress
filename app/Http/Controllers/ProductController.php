@@ -87,10 +87,11 @@ class ProductController extends Controller
         $user = Auth::user();
         if ($user->hasRole('super_admin') || $user->hasRole('product_manager')) {
 
+            $product = Product::find($id);
             return response()->json([
                 'status' => '200 Ok',
                 'message' => 'Welcome Super Admin',
-                'data' => Product::find($id)
+                'data' => $product,
             ]);
         }
     }
