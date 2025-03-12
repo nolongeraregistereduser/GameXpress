@@ -59,6 +59,7 @@ public function index()
                 'message' => 'Super Admin Statistics',
                 'data' => [
                     'total_users' => User::count(),
+                    // i will add other statistics when impplementing categ and products in db 
                 ]
             ]);
         }
