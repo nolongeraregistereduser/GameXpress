@@ -155,6 +155,19 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $user = Auth::user();
+        if (!$user->hasRole('super_admin') && !$user->hasRole('product_manager')) {
+            return response()->json([
+                'status' => '403 Forbidden',
+                'message' => 'Unauthorized Access',
+            ], 403);
+        }
+
+        $product->delete();
+
+        return response()->json([
+            'status' => '200 Ok',
+            'message' => 'Product deleted successfully',
+        ]);
     }
 }
