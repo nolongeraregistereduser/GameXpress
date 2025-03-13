@@ -35,22 +35,20 @@ class ProductImageController extends Controller
             ]);
         }
 
-        $productImage = ProductImage::create([
-            'product_id' => $request->product_id,
-            'image_url' => $request->image_url,
-            'is_primary' => $request->is_primary,
-        ]);
-
         if ($request->is_primary) {
             ProductImage::where('product_id', $request->product_id)
             ->where('is_primary', true)
             ->update(['is_primary' => false]);
         }
 
-        return response()->json([
-            'status' => '1',
-            'data' => $productImage
+        $productImage = ProductImage::create([
+            'product_id' => $request->product_id,
+            'image_url' => $request->image_url,
+            'is_primary' => $request->is_primary,
         ]);
+
+
+
 
     }
 }
