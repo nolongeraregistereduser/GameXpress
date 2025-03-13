@@ -55,4 +55,24 @@ class ProductImageController extends Controller
 
 
     }
+
+
+    public function destroy($id)
+    {
+        $productImage = ProductImage::find($id);
+
+        if (!$productImage) {
+            return response()->json([
+                'status' => '0',
+                'message' => 'Product Image not found'
+            ]);
+        }
+
+        $productImage->delete();
+
+        return response()->json([
+            'status' => '2OO Ok',
+            'message' => 'Product Image Deleted Successfully'
+        ]);
+    }
 }
