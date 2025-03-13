@@ -75,4 +75,23 @@ public function store(Request $request){
   }
 
 
+  public function destroy($id){
+
+    $user = User::find($id);
+
+    if(auth()->user()->hasRole('super_admin') || auth()->user()->hasRole('user_manager')){
+
+        if($user){
+            $user->delete();
+            return response()->json([
+                'message' => 'User deleted',
+            ]);
+        }else{
+            return response()->json([
+                'message' => 'User not found'
+            ]);
+        }
+    }
+  }
+
 }
