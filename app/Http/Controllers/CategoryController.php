@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
@@ -31,4 +32,26 @@ class CategoryController extends Controller
     }
   
 
+
+    public function store (Request $request){
+
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'slug' => 'required',
+        ]);
+        $category = Category::create([
+            'name' => $request->name,
+            'slug' => $request->slug,
+        ]);
+
+        return response()->json([
+            'status' => '200 Ok',
+            'message' => 'Category created successfully',
+            'data' => $category
+        ]);
+    }
+
+
+    
 }
