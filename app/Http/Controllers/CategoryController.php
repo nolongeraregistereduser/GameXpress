@@ -54,20 +54,75 @@ class CategoryController extends Controller
 
 
     public function show($id){
-        $category = Category::find($id);
-        if($category){
+
+        $user = Auth::user();
+        if($user->hasRole('super_admin') || $user->hasRole('product_manager')){
+
+ 
+            $category = Category::find($id);
+            if($category){
+                return response()->json([
+                    'status' => '200 Ok',
+                    'message' => 'Category found',
+                    'data' => $category
+                ]);
+            }
+            else{
+                return response()->json([
+                    'status' => '404 Not Found',
+                    'message' => 'Category not found',
+                ]);
+            }
+  
+
+    }}
+
+
+    public function update(Request $request, $id)
+    {
+        $user = Auth::user();
+        
+        if (!$user->hasRole('super_admin') && !$user->hasRole('product_manager')) {
             return response()->json([
-                'status' => '200 Ok',
-                'message' => 'Category found',
-                'data' => $category
-            ]);
+                'status' => '403 Forbidden',
+                'message' => 'Unauthorized Access',
+            ], 403);
         }
-        else{
+        
+        $category = Category::find($id);
+
+        if (!$category) {
             return response()->json([
                 'status' => '404 Not Found',
-                'message' => 'Category not found',
-            ]);
+                'message' => 'Product not found',
+            ], 404);
         }
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'slug' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => '400 Bad Request',
+                'errors' => $validator->errors()
+            ], 400);
+        }
+
+        $category->update([
+            'name' => $request->name,
+            'slug' => $request->slug,
+
+        ]);
+
+        return response()->json([
+            'status' => '200 Ok',
+            'message' => 'Product updated successfully',
+            'data' => $category,
+        ]);
     }
+
+      
 
 }
