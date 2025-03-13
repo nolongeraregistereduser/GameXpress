@@ -47,7 +47,11 @@ class ProductImageController extends Controller
             'is_primary' => $request->is_primary,
         ]);
 
-
+        return response()->json([
+            'status' => '2OO Ok',
+            'message' => 'Product Image Created Successfully',
+            'data' => $productImage
+        ]);
 
 
     }
