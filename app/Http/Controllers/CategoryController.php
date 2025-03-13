@@ -123,6 +123,34 @@ class CategoryController extends Controller
         ]);
     }
 
+    
+    public function destroy($id)
+    {
+        $user = Auth::user();
+
+        if (!$user->hasRole('super_admin') && !$user->hasRole('product_manager')) {
+            return response()->json([
+                'status' => '403 Forbidden',
+                'message' => 'Unauthorized Access',
+            ], 403);
+        }
+
+        $category = Category::find($id);
+
+        if (!$category) {
+            return response()->json([
+                'status' => '404 Not Found',
+                'message' => 'Product not found',
+            ], 404);
+        }
+
+        $category->delete();
+
+        return response()->json([
+            'status' => '200 Ok',
+            'message' => 'Product deleted successfully',
+        ]);
+    }
       
 
 }
