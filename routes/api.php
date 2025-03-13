@@ -66,3 +66,8 @@ route::get('/categories/{id}', [App\Http\Controllers\CategoryController::class, 
 route::put('/categories/update/{id}', [App\Http\Controllers\CategoryController::class, 'update'])->middleware('auth:sanctum');
 route::post('/categories/delete/{id}', [App\Http\Controllers\CategoryController::class, 'destroy'])->middleware('auth:sanctum');
 
+
+// Product Image Routes
+
+route::get('/product_images', [App\Http\Controllers\ProductImageController::class, 'index']);
+
