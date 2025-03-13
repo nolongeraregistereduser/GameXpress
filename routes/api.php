@@ -74,3 +74,8 @@ route::post('/product_images/create', [App\Http\Controllers\ProductImageControll
 route::post('/product_images/delete/{id}', [App\Http\Controllers\ProductImageController::class, 'destroy']);
 
 
+// User Management Routes
+
+route::get('/users', [App\Http\Controllers\UserController::class, 'index'])->middleware('auth:sanctum');
+route::get('/users/{id}', [App\Http\Controllers\UserController::class, 'show'])->middleware('auth:sanctum');
+route::post('/users/create', [App\Http\Controllers\UserController::class, 'store'])->middleware('auth:sanctum');
