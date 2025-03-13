@@ -56,3 +56,13 @@ route::post('/products/create', [App\Http\Controllers\ProductController::class, 
 route::get('/products/{id}', [App\Http\Controllers\ProductController::class, 'show'])->middleware('auth:sanctum');
 route::put('/products/update/{id}', [App\Http\Controllers\ProductController::class, 'update'])->middleware('auth:sanctum');
 route::post('/products/delete/{id}', [App\Http\Controllers\ProductController::class, 'destroy'])->middleware('auth:sanctum');
+
+
+// Categories Routes ya kho 
+
+route::get('/categories', [App\Http\Controllers\CategoryController::class, 'index'])->middleware('auth:sanctum');
+route::post('/categories/create', [App\Http\Controllers\CategoryController::class, 'store'])->middleware('auth:sanctum');
+route::get('/categories/{id}', [App\Http\Controllers\CategoryController::class, 'show'])->middleware('auth:sanctum');
+route::put('/categories/update/{id}', [App\Http\Controllers\CategoryController::class, 'update'])->middleware('auth:sanctum');
+route::post('/categories/delete/{id}', [App\Http\Controllers\CategoryController::class, 'destroy'])->middleware('auth:sanctum');
+
