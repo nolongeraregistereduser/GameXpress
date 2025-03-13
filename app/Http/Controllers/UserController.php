@@ -62,4 +62,37 @@ class UserController extends Controller
     }
 
 }
+
+
+  public function store(Request $request){
+
+    if(auth()->user()->hasRole('super_admin') || auth()->user()->hasRole('user_manager')){
+
+        $validator = validator($request->all(), [
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6',
+            'role' => 'product_manager'
+        ]);
+
+        if($validator->fails()){
+            return response()->json([
+                'message' => 'Validation failed',
+                'errors' => $validator->errors()
+            ]);
+        }
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'role' => 'product_manager',
+        ]);
+        
+        return response()->json([
+            'message' => 'User created',
+            'data' => $user,
+        ]);
+    }
+  }
 }
