@@ -70,4 +70,6 @@ route::post('/categories/delete/{id}', [App\Http\Controllers\CategoryController:
 // Product Image Routes
 
 route::get('/product_images', [App\Http\Controllers\ProductImageController::class, 'index']);
+route::post('/product_images/create', [App\Http\Controllers\ProductImageController::class, 'store']);
+
 
