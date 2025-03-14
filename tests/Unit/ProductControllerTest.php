@@ -56,7 +56,6 @@ class ProductControllerTest extends TestCase
         ]);
     }
 
-  
     public function test_store_product(): void
     {
         Sanctum::actingAs($this->superAdmin);
@@ -89,7 +88,6 @@ class ProductControllerTest extends TestCase
         ]);
     }
     
-  
     public function test_show_product(): void
     {
         Sanctum::actingAs($this->productManager);
@@ -108,10 +106,6 @@ class ProductControllerTest extends TestCase
             ]);
     }
     
- 
-
-    
-
     public function test_validation_errors_when_updating(): void
     {
         Sanctum::actingAs($this->superAdmin);
@@ -122,9 +116,6 @@ class ProductControllerTest extends TestCase
             ->assertJsonValidationErrors(['name', 'slug', 'price', 'stock', 'status']);
     }
     
- 
-    
-
     public function test_unauthorized_update_of_product(): void
     {
         Sanctum::actingAs($this->regularUser);
@@ -145,35 +136,12 @@ class ProductControllerTest extends TestCase
                 'message' => 'Unauthorized Access',
             ]);
             
+        $this->refreshDatabase();
         $this->assertDatabaseMissing('products', [
             'id' => $this->product->id,
             'name' => 'Updated Product',
         ]);
     }
-    
- 
-    
-    /**
-     * Test unauthorized deletion of product
-     */
-    public function test_unauthorized_deletion_of_product(): void
-    {
-        Sanctum::actingAs($this->regularUser);
-        
-        $response = $this->postJson("/api/products/delete/{$this->product->id}");
-        
-        $response->assertStatus(403)
-            ->assertJson([
-                'status' => '403 Forbidden',
-                'message' => 'Unauthorized Access',
-            ]);
-            
-        $this->assertDatabaseHas('products', [
-            'id' => $this->product->id,
-        ]);
-    }
-    
-  
     
     public function test_update_nonexistent_product(): void
     {
@@ -196,4 +164,27 @@ class ProductControllerTest extends TestCase
                 'message' => 'Product not found',
             ]);
     }
+
+
+
+    
+
+    public function test_delete_product_unauthorized(): void
+    {
+        Sanctum::actingAs($this->regularUser);
+        
+        $response = $this->deleteJson("/api/products/delete/{$this->product->id}");
+        
+        $response->assertStatus(403)
+            ->assertJson([
+                'status' => '403 Forbidden',
+                'message' => 'Unauthorized Access',
+            ]);
+            
+        $this->assertDatabaseHas('products', [
+            'id' => $this->product->id,
+        ]);
+    }
+    
+
 }
