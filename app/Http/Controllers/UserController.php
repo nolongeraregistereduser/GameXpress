@@ -12,12 +12,19 @@ class UserController extends Controller
 
    if(auth()->user()->hasRole('super_admin') || auth()->user()->hasRole('user_manager')){
 
-    return response()->json([
-        'message' => 'You are super admin or user manager'
-    ]);
+    if(auth()->user()->hasRole('super_admin')){
+        return response()->json([
+            'message' => 'You are super admin',
+        ]);
 
     }
+    else{
+        return response()->json([
+            'message' => 'You are user manager',
+        ]);
+    }       
                            }
+    }
 
 
   public function show($id){
