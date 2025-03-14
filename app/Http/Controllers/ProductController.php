@@ -18,7 +18,7 @@ class ProductController extends Controller
     {
         $user = Auth::user();
 
-        if($user->hasRole('super_admin')){
+        if($user->hasRole('super_admin') || $user->hasRole('product_manager')) {
 
          return response()->json([
             'status' => '200 Ok',

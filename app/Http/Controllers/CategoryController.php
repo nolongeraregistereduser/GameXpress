@@ -19,7 +19,7 @@ class CategoryController extends Controller
 
          return response()->json([
             'status' => '200 Ok',
-            'message' => 'Welcome Super Admin',
+            'message' => 'Welcome! Here you find all categories',
             'data' => Category::all()
         ]);
         }
