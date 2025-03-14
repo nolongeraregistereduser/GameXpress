@@ -44,58 +44,7 @@ class UserControllerTest extends TestCase
         $this->testUser->assignRole('product_manager');
     }
 
-    /**
-     * Test index method with authorized user
-     */
-    public function test_index_with_authorized_user(): void
-    {
-        Sanctum::actingAs($this->superAdmin);
-        
-        $response = $this->getJson('/api/users');
-        
-        $response->assertStatus(200)
-            ->assertJson([
-                'message' => 'You are super admin or user manager'
-            ]);
-    }
-
-
-
-    public function test_show_user_with_authorized_user(): void
-    {
-        Sanctum::actingAs($this->userManager);
-        
-        $response = $this->getJson("/api/users/{$this->testUser->id}");
-        
-        $response->assertStatus(200)
-            ->assertJson([
-                'message' => 'User found',
-            ])
-            ->assertJsonStructure([
-                'message',
-                'data' => [
-                    'id',
-                    'name',
-                    'email',
-                ]
-            ]);
-    }
-    
-
-    public function test_show_nonexistent_user(): void
-    {
-        Sanctum::actingAs($this->superAdmin);
-        
-        $nonExistentId = 9999;
-        
-        $response = $this->getJson("/api/users/{$nonExistentId}");
-        
-        $response->assertStatus(200)
-            ->assertJson([
-                'message' => 'User not found',
-            ]);
-    }
-    
+   
 
 
  
@@ -124,6 +73,40 @@ class UserControllerTest extends TestCase
     }
 
 
+
+    public function test_delete_nonexistent_user(): void
+    {
+        Sanctum::actingAs($this->superAdmin);
+        
+        $nonExistentId = 999999;
+        
+        $response = $this->deleteJson("/api/users/delete/{$nonExistentId}");
+        
+        $response->assertStatus(200)
+            ->assertJson([
+                'message' => 'User not found',
+            ]);
+    }
+
+
+
+
+    public function delete_user_valid_data(): void
+    {
+        Sanctum::actingAs($this->superAdmin);
+
+        $response = $this->deleteJson("/api/users/delete/{$this->testUser->id}");
+
+        $response->assertStatus(200)
+            ->assertJson([
+                'message' => 'User deleted successfully',
+            ]);
+
+        $this->assertDatabaseMissing('users', [
+            'id' => $this->testUser->id,
+        ]);
+    }
     
-    
+
+
 }

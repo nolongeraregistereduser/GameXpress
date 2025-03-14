@@ -79,4 +79,4 @@ route::post('/product_images/delete/{id}', [App\Http\Controllers\ProductImageCon
 route::get('/users', [App\Http\Controllers\UserController::class, 'index'])->middleware('auth:sanctum');
 route::get('/users/{id}', [App\Http\Controllers\UserController::class, 'show'])->middleware('auth:sanctum');
 route::post('/users/create', [App\Http\Controllers\UserController::class, 'store'])->middleware('auth:sanctum');
-route::post('/users/delete/{id}', [App\Http\Controllers\UserController::class, 'destroy'])->middleware('auth:sanctum');
+route::delete('/users/delete/{id}', [App\Http\Controllers\UserController::class, 'destroy'])->middleware('auth:sanctum');
