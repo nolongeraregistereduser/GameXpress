@@ -22,7 +22,7 @@ class ProductController extends Controller
 
          return response()->json([
             'status' => '200 Ok',
-            'message' => 'Welcome Super Admin',
+            'message' => 'Welcom ! Here is the product list',
             'data' => Product::all()
         ]);
         }
@@ -90,7 +90,7 @@ class ProductController extends Controller
             $product = Product::find($id);
             return response()->json([
                 'status' => '200 Ok',
-                'message' => 'Welcome Super Admin',
+                'message' => 'Welcome, here is the product details!',
                 'data' => $product,
             ]);
         }
